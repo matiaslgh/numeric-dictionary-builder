@@ -7,7 +7,7 @@ class Args {
     if (!name) throw new Error('A name is required');
 
     let arrName = name;
-    if (!name instanceof Array) {
+    if (!(name instanceof Array)) {
       arrName = [name];
     }
 
@@ -24,11 +24,13 @@ class Args {
     return this;
   }
 
+  clean() {
+    this.opt = [];
+  }
+
   parse() {
 
   }
 }
 
-const asd = new Args();
-
-console.log(asd.option().option);
+module.exports = new Args();

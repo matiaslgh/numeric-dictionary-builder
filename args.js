@@ -3,7 +3,7 @@ class Args {
     this.opt = [];
   }
 
-  option(name, description='', default_='', multipleUses=false, init=false) {
+  option(name, description = '', default_ = '', multipleUses = false, init = false) {
     if (!name) throw new Error('A name is required');
 
     let arrName = name;
@@ -28,9 +28,7 @@ class Args {
     this.opt = [];
   }
 
-  parse() {
-
-  }
+  parse() {}
 }
 
 module.exports = new Args();

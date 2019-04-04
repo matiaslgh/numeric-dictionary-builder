@@ -45,8 +45,7 @@ describe('Args class', () => {
         args
           .option('a')
           .option('b')
-          .option('c')
-          .option
+          .option('c').option
       ).toBeInstanceOf(Function);
     });
   });
@@ -58,5 +57,5 @@ describe('Args class', () => {
       args.clean();
       expect(args.opt.length).toBe(0);
     });
-  })
+  });
 });

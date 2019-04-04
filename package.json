@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/matiaslgh/numeric-dictionary-builder#readme",
   "devDependencies": {
+    "eslint": "^5.16.0",
     "jest": "^24.6.0"
   }
 }

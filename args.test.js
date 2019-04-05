@@ -34,31 +34,26 @@ describe('Args class', () => {
 
     it('adds data into internal array', () => {
       const init = jest.fn();
-      args.option('name1', 'description1', 'default1', true, init);
-      args.option('name2', 'description2', 'default2', false, init);
-      args.option('name3', 'description3', 'default3', true, init);
+      const configs = [
+        ['name1', 'description1', 'default1', true, init],
+        ['name2', 'description2', 'default2', false, init],
+        ['name3', 'description3', 'default3', true, init],
+      ];
 
-      expect(args.opt[0]).toEqual({
-        name: 'name1',
-        description: 'description1',
-        default_: 'default1',
-        multipleUses: true,
-        init,
+      configs.forEach(config => {
+        args.option(...config);
       });
-      expect(args.opt[1]).toEqual({
-        name: 'name2',
-        description: 'description2',
-        default_: 'default2',
-        multipleUses: false,
-        init,
+
+      configs.forEach((config, index) => {
+        expect(args.opt[index]).toEqual({
+          name: config[0],
+          description: config[1],
+          default_: config[2],
+          multipleUses: config[3],
+          init: config[4],
+        });
       });
-      expect(args.opt[2]).toEqual({
-        name: 'name3',
-        description: 'description3',
-        default_: 'default3',
-        multipleUses: true,
-        init,
-      });
+
       expect(args.opt.length).toBe(3);
     });
 

@@ -75,4 +75,17 @@ describe('Args class', () => {
       expect(args.opt.length).toBe(0);
     });
   });
+
+  describe('args.parse(...)', () => {
+    it('throws an Error if the param is not an Array', () => {
+      const params = [1, {}, 'string', null];
+
+      // Last param will be undefined, that's why params.length (without -1)
+      for (let i = 0; i <= params.length; i++) {
+        expect(() => {
+          args.parse(params[i]);
+        }).toThrowError('Array expected');
+      }
+    });
+  });
 });

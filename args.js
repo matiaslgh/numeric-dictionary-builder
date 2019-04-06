@@ -28,7 +28,9 @@ class Args {
     this.opt = [];
   }
 
-  parse() {}
+  parse(argsArr) {
+    if (!(argsArr instanceof Array)) throw new Error('Array expected');
+  }
 }
 
 module.exports = new Args();

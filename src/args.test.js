@@ -130,5 +130,25 @@ describe('Args class', () => {
         something: values,
       });
     });
+
+    it('works ok when the default value is explicitly passed into the function', () => {
+      args.option(['something'], 'some description...', 'default');
+
+      const values = ['value1', 'default', 'value3'];
+      const params = [
+        '/usr/local/bin/node',
+        'script.js',
+        '--something',
+        values[0],
+        '--something',
+        values[1],
+        '--something',
+        values[2],
+      ];
+
+      expect(args.parse(params)).toEqual({
+        something: values,
+      });
+    });
   });
 });

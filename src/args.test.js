@@ -100,7 +100,7 @@ describe('Args class', () => {
       expect(args.parse(params).a).toEqual('valueA');
     });
 
-    it('returns an object with default values if the options is not specified as a param', () => {
+    it('returns an object with default values if the options are not specified as a param', () => {
       args.option('a', 'description a', 'default a').option('b', 'description b', 'default b');
 
       const params = ['/usr/local/bin/node', 'script.js'];
@@ -108,6 +108,26 @@ describe('Args class', () => {
       expect(args.parse(params)).toEqual({
         a: 'default a',
         b: 'default b',
+      });
+    });
+
+    it('returns an array of values if a param is passed more than once', () => {
+      args.option(['something', 's'], 'some description...', 'default');
+
+      const values = ['value1', 'value2', 'value3'];
+      const params = [
+        '/usr/local/bin/node',
+        'script.js',
+        '-s',
+        values[0],
+        '-s',
+        values[1],
+        '--something',
+        values[2],
+      ];
+
+      expect(args.parse(params)).toEqual({
+        something: values,
       });
     });
   });

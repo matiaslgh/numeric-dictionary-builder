@@ -39,15 +39,34 @@ class Args {
   parse(params) {
     if (!(params instanceof Array)) throw new Error('Array expected');
 
-    let currentOption;
+    const paramCounter = {};
+    let currentParam;
 
     params
       .filter((param, index) => ![0, 1].includes(index))
       .forEach(param => {
         if (param.startsWith('-')) {
-          currentOption = removeFirstHyphens(param);
+          const cleanedParam = removeFirstHyphens(param);
+          const opt = this.options.get(cleanedParam);
+          currentParam = opt.realName ? opt.realName : cleanedParam;
+
+          paramCounter[currentParam] = paramCounter[currentParam]
+            ? paramCounter[currentParam] + 1
+            : 1;
         } else {
-          this.config[currentOption] = param;
+          const theParamWasNotRepeated = paramCounter[currentParam] === 1;
+          const theSameParamWasUsedTwice = paramCounter[currentParam] === 2;
+
+          if (theParamWasNotRepeated) {
+            // One param has one string/number as a value
+            this.config[currentParam] = param;
+          } else if (theSameParamWasUsedTwice) {
+            // A param used twice makes the config to become an array with 2 values
+            this.config[currentParam] = [this.config[currentParam], param];
+          } else {
+            // A same param used more than twice, will have more than two values
+            this.config[currentParam].push(param);
+          }
         }
       });
 

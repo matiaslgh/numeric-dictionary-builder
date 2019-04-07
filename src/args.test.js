@@ -99,5 +99,16 @@ describe('Args class', () => {
 
       expect(args.parse(params).a).toEqual('valueA');
     });
+
+    it('returns an object with default values if the options is not specified as a param', () => {
+      args.option('a', 'description a', 'default a').option('b', 'description b', 'default b');
+
+      const params = ['/usr/local/bin/node', 'script.js'];
+
+      expect(args.parse(params)).toEqual({
+        a: 'default a',
+        b: 'default b',
+      });
+    });
   });
 });

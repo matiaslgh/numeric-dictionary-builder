@@ -1,4 +1,4 @@
-const { removeFirstUnderscores } = require('./utils');
+const { removeFirstHyphens } = require('./utils');
 class Args {
   constructor() {
     this.options = new Map();
@@ -45,7 +45,7 @@ class Args {
       .filter((param, index) => ![0, 1].includes(index))
       .forEach(param => {
         if (param.startsWith('-')) {
-          currentOption = removeFirstUnderscores(param);
+          currentOption = removeFirstHyphens(param);
         } else {
           this.config[currentOption] = param;
         }

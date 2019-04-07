@@ -1,9 +1,10 @@
 class Args {
   constructor() {
-    this.opt = [];
+    this.options = new Map();
+    this.config = {};
   }
 
-  option(name, description = '', default_ = '', multipleUses = false, init = false) {
+  option(name, description = '', default_ = '', init) {
     if (!name) throw new Error('A name is required');
 
     let arrName = name;
@@ -11,13 +12,18 @@ class Args {
       arrName = [name];
     }
 
-    arrName.forEach(n => {
-      this.opt.push({
-        name: n,
-        description,
-        default_,
-        multipleUses,
-        init,
+    const [realName, ...aliases] = arrName;
+
+    this.config[realName] = default_;
+    this.options.set(realName, {
+      description,
+      default_,
+      init,
+    });
+
+    aliases.forEach(alias => {
+      this.options.set(alias, {
+        realName,
       });
     });
 
@@ -25,7 +31,7 @@ class Args {
   }
 
   clean() {
-    this.opt = [];
+    this.options = new Map();
   }
 
   parse(argsArr) {

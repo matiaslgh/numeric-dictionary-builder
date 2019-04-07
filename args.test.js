@@ -5,8 +5,12 @@ describe('Args class', () => {
     args.clean();
   });
 
-  it('creates an empty array of options', () => {
-    expect(args.opt.length).toBe(0);
+  it('creates an empty Map of options', () => {
+    expect(args.options.size).toBe(0);
+  });
+
+  it('creates an empty Object as a config', () => {
+    expect(args.config).toEqual({});
   });
 
   describe('args.option()', () => {
@@ -18,43 +22,40 @@ describe('Args class', () => {
 
     it('accepts an array of names', () => {
       const names = ['name_1', 'name_2'];
-      const config = ['a description', 'default value', false];
+      const config = ['a description', 'default value'];
       args.option(names, ...config);
 
-      names.forEach((name, index) => {
-        expect(args.opt[index]).toEqual({
-          name: name,
-          description: config[0],
-          default_: config[1],
-          multipleUses: config[2],
-          init: false,
-        });
+      expect(args.options.get(names[0])).toEqual({
+        description: config[0],
+        default_: config[1],
+      });
+
+      expect(args.options.get(names[1])).toEqual({
+        realName: names[0],
       });
     });
 
-    it('adds data into internal array', () => {
+    it('adds data into internal Map', () => {
       const init = jest.fn();
       const configs = [
-        ['name1', 'description1', 'default1', true, init],
-        ['name2', 'description2', 'default2', false, init],
-        ['name3', 'description3', 'default3', true, init],
+        ['name1', 'description1', 'default1', init],
+        ['name2', 'description2', 'default2', init],
+        ['name3', 'description3', 'default3', init],
       ];
 
       configs.forEach(config => {
         args.option(...config);
       });
 
-      configs.forEach((config, index) => {
-        expect(args.opt[index]).toEqual({
-          name: config[0],
+      configs.forEach(config => {
+        expect(args.options.get(config[0])).toEqual({
           description: config[1],
           default_: config[2],
-          multipleUses: config[3],
-          init: config[4],
+          init: config[3],
         });
       });
 
-      expect(args.opt.length).toBe(3);
+      expect(args.options.size).toBe(3);
     });
 
     it('is chainable', () => {
@@ -68,11 +69,11 @@ describe('Args class', () => {
   });
 
   describe('args.clean()', () => {
-    it('removes all the options from the internal array', () => {
+    it('removes all the options from the internal Map', () => {
       args.option('test');
-      expect(args.opt.length).toBe(1);
+      expect(args.options.size).toBe(1);
       args.clean();
-      expect(args.opt.length).toBe(0);
+      expect(args.options.size).toBe(0);
     });
   });
 

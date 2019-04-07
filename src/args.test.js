@@ -69,11 +69,14 @@ describe('Args class', () => {
   });
 
   describe('args.clean()', () => {
-    it('removes all the options from the internal Map', () => {
-      args.option('test');
+    it('removes old state of class Args', () => {
+      const [key, value] = ['test', 'default'];
+      args.option(key, 'decription', value);
       expect(args.options.size).toBe(1);
+      expect(args.config[key]).toEqual(value);
       args.clean();
       expect(args.options.size).toBe(0);
+      expect(args.config).toEqual({});
     });
   });
 

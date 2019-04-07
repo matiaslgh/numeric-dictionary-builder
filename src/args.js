@@ -33,6 +33,7 @@ class Args {
 
   clean() {
     this.options = new Map();
+    this.config = {};
   }
 
   parse(params) {

@@ -1,3 +1,4 @@
+const { removeFirstUnderscores } = require('./utils');
 class Args {
   constructor() {
     this.options = new Map();
@@ -34,8 +35,22 @@ class Args {
     this.options = new Map();
   }
 
-  parse(argsArr) {
-    if (!(argsArr instanceof Array)) throw new Error('Array expected');
+  parse(params) {
+    if (!(params instanceof Array)) throw new Error('Array expected');
+
+    let currentOption;
+
+    params
+      .filter((param, index) => ![0, 1].includes(index))
+      .forEach(param => {
+        if (param.startsWith('-')) {
+          currentOption = removeFirstUnderscores(param);
+        } else {
+          this.config[currentOption] = param;
+        }
+      });
+
+    return this.config;
   }
 }
 

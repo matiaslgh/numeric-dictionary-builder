@@ -88,5 +88,13 @@ describe('Args class', () => {
         }).toThrowError('Array expected');
       }
     });
+
+    it('returns an object with keys/values according the params given', () => {
+      args.option('a', 'description a', 'defaultA');
+
+      const params = ['/usr/local/bin/node', 'script.js', '-a', 'valueA'];
+
+      expect(args.parse(params).a).toEqual('valueA');
+    });
   });
 });

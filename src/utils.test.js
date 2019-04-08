@@ -16,4 +16,19 @@ describe('Utils', () => {
       });
     });
   });
+
+  describe('isAnOption(string)', () => {
+    const { isAnOption } = utils;
+
+    const options = ['-a', '--something'];
+    const nonOptions = ['notAnOption', 10, null];
+
+    it('returns true if the param is an option', () => {
+      options.forEach(opt => expect(isAnOption(opt)).toBe(true));
+    });
+
+    it('returns false if the param is not an option or is not a valid value', () => {
+      nonOptions.forEach(opt => expect(isAnOption(opt)).toBe(false));
+    });
+  });
 });

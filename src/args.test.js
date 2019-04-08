@@ -150,5 +150,24 @@ describe('Args class', () => {
         something: values,
       });
     });
+
+    it('set the option to true if no value is passed next to the param', () => {
+      args.option('a', 'description1', 'default1');
+      const params1 = ['/usr/local/bin/node', 'script.js', '-a'];
+
+      expect(args.parse(params1)).toEqual({
+        a: true,
+      });
+
+      args.option('b', 'description2', 'default2').option('c', 'description3', 'default3');
+
+      const params2 = ['/usr/local/bin/node', 'script.js', '-a', '-c'];
+
+      expect(args.parse(params2)).toEqual({
+        a: true,
+        b: 'default2',
+        c: true,
+      });
+    });
   });
 });

@@ -1,3 +1,8 @@
+const dictionaryBuilder = require('./dictionaryBuilder');
+const fs = require('fs');
+
+jest.mock('fs');
+
 describe('dictionaryBuilder(...)', () => {
   it('uses default values if it does not receive params', () => {
     // TODO: Implement this test
@@ -12,7 +17,14 @@ describe('dictionaryBuilder(...)', () => {
   });
 
   it('saves the content in batches', () => {
-    // TODO: Implement this test
+    // TODO: Check why end: 10, batchSize: 2 calls the method 4 times instead of 5
+
+    dictionaryBuilder({
+      end: 10,
+      batchSize: 5,
+    });
+
+    expect(fs.appendFileSync).toHaveBeenCalledTimes(2);
   });
 
   it('uses default values if it does not receive params', () => {

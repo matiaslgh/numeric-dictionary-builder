@@ -1,21 +1,16 @@
-const fs = require('fs');
+const args = require('./args');
+const dictionaryBuilder = require('./dictionaryBuilder');
+const defaults = require('./defaults');
 
-const PREFIX = '014';
-const INIT = 17000000;
-const END = 99999999;
-const BATCH_SIZE = 1000000;
-const FILE_NAME = `${PREFIX}-DNI-completo`;
+args
+  .option(['prefix', 'p'], 'Text to be added before the generated numbers', defaults.PREFIX)
+  .option(['suffix', 's'], 'Text to be added after the generated numbers', defaults.SUFFIX)
+  .option(['init', 'i'], 'First number of the sequence', defaults.INIT)
+  .option(['end', 'e'], 'Last number of the sequence', defaults.END)
+  .option(
+    ['batchSize', 'b'],
+    'Amount of generated keys saved in memory before adding them into the output file',
+    defaults.BATCH_SIZE
+  );
 
-let init = INIT;
-let end = INIT + BATCH_SIZE;
-
-while (end !== END) {
-  let batch = '';
-  for (let i = init; i <= end; i++) {
-    batch += PREFIX + i + '\n';
-  }
-
-  fs.appendFileSync(FILE_NAME, batch);
-  init = end + 1;
-  end = Math.min(end + 1 + BATCH_SIZE, END);
-}
+dictionaryBuilder(args.parse(process.argv));

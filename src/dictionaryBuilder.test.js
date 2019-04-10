@@ -1,11 +1,25 @@
-const dictionaryBuilder = require('./dictionaryBuilder');
 const fs = require('fs');
+const dictionaryBuilder = require('./dictionaryBuilder');
+const { INIT, END, FILENAME } = require('./defaults');
 
 jest.mock('fs');
 
 describe('dictionaryBuilder(...)', () => {
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
+
   it('uses default values if it does not receive params', () => {
-    // TODO: Implement this test
+    let numbers = '';
+
+    for (let i = INIT; i <= END; i++) {
+      numbers += `${i}\n`;
+    }
+
+    dictionaryBuilder();
+
+    expect(fs._getMockFiles()[FILENAME]).toEqual(numbers);
+    expect(fs.appendFileSync).toHaveBeenCalledTimes(1);
   });
 
   it('creates a dictionary from init to end', () => {

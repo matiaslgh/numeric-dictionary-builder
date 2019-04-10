@@ -8,8 +8,6 @@ function dictionaryBuilder({
   end = defaults.END,
   batchSize = defaults.BATCH_SIZE,
 } = {}) {
-  const FILE_NAME = 'genDict.txt';
-
   let batchInit = init;
   let batchEnd = Math.min(init + batchSize - 1, end);
 
@@ -19,7 +17,7 @@ function dictionaryBuilder({
       batch += prefix + i + suffix + '\n';
     }
 
-    fs.appendFileSync(FILE_NAME, batch);
+    fs.appendFileSync(defaults.FILENAME, batch);
     batchInit = batchEnd + 1;
     batchEnd = batchEnd + 1 + batchSize;
   }

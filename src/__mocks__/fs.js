@@ -10,8 +10,6 @@ fs.appendFileSync = jest.fn((filename, content) => {
   mockFiles[filename] += content;
 });
 
-fs._getMockFiles = () => {
-  return mockFiles;
-};
+fs._getMockFiles = () => mockFiles;
 
 module.exports = fs;

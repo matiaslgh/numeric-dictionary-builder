@@ -36,7 +36,19 @@ describe('dictionaryBuilder(...)', () => {
   });
 
   it('creates a dictionary with prefixes and suffixes', () => {
-    // TODO: Implement this test
+    const { fs, dictionaryBuilder } = makeRequires();
+    const [p, s] = ['PREFIX', 'SUFFIX'];
+    const str = `${p}2${s}\n${p}3${s}\n${p}4${s}\n${p}5${s}\n${p}6${s}\n${p}7${s}\n`;
+
+    dictionaryBuilder({
+      init: 2,
+      end: 7,
+      batchSize: 2,
+      suffix: s,
+      prefix: p,
+    });
+
+    expect(fs._getMockFiles()[FILENAME]).toEqual(str);
   });
 
   it('saves the content in batches', () => {

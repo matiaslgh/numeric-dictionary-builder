@@ -52,15 +52,23 @@ describe('dictionaryBuilder(...)', () => {
   });
 
   it('saves the content in batches', () => {
-    const { fs, dictionaryBuilder } = makeRequires();
-    // TODO: Check why end: 10, batchSize: 2 calls the method 4 times instead of 5
+    const configs = [
+      { init: 1, end: 11, batchSize: 2, count: 6 }, // Odd # of numbers and even batchSize
+      { init: 2, end: 12, batchSize: 5, count: 3 }, // Odd # of numbers and odd batchSize
+      { init: 1, end: 10, batchSize: 4, count: 3 }, // Even # of numbers and even batchSize
+      { init: 2, end: 11, batchSize: 3, count: 4 }, // Even # of numbers and odd batchSize
+      { init: 3, end: 5, batchSize: 100, count: 1 }, // batchSize greater than # of numbers
+    ];
 
-    dictionaryBuilder({
-      end: 10,
-      batchSize: 5,
+    configs.forEach(({ init, end, batchSize, count }) => {
+      jest.resetModules();
+
+      const { fs, dictionaryBuilder } = makeRequires();
+
+      dictionaryBuilder({ init, end, batchSize });
+
+      expect(fs.appendFileSync).toHaveBeenCalledTimes(count);
     });
-
-    expect(fs.appendFileSync).toHaveBeenCalledTimes(2);
   });
 
   it('uses default values if it does not receive params', () => {

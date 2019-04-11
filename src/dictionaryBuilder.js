@@ -8,21 +8,23 @@ function dictionaryBuilder({
   end = defaults.END,
   batchSize = defaults.BATCH_SIZE,
 } = {}) {
+  end++; // Without this, the end wouldn't be included
+
   let batchInit = init;
-  let batchEnd = Math.min(init + batchSize - 1, end);
+  let batchEnd = Math.min(init + batchSize, end);
   let finish = false;
 
   while (!finish) {
-    if (batchEnd >= end) finish = true;
+    finish = batchEnd >= end;
 
     let batch = '';
-    for (let i = batchInit; i <= batchEnd; i++) {
+    for (let i = batchInit; i < batchEnd; i++) {
       batch += prefix + i + suffix + '\n';
     }
 
     fs.appendFileSync(defaults.FILENAME, batch);
-    batchInit = batchEnd + 1;
-    batchEnd = Math.min(batchEnd + 1 + batchSize, end);
+    batchInit = batchEnd;
+    batchEnd = Math.min(batchEnd + batchSize, end);
   }
 }
 

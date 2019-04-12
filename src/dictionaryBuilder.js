@@ -8,6 +8,8 @@ function dictionaryBuilder({
   end = defaults.END,
   batchSize = defaults.BATCH_SIZE,
 } = {}) {
+  if (init > end) throw new Error('End must be greater than init');
+
   end++; // Without this, the end wouldn't be included
 
   let batchInit = init;

@@ -71,15 +71,18 @@ describe('dictionaryBuilder(...)', () => {
     });
   });
 
-  it('uses default values if it does not receive params', () => {
-    // TODO: Implement this test
-  });
-
   it('allows to build multiples dictionaries at once in a single file', () => {
     // TODO: Implement this test
   });
 
   it('throws an error when end is less than or equal than init', () => {
-    // TODO: Implement this test
+    const dictionaryBuilder = require('./dictionaryBuilder');
+
+    expect(() => {
+      dictionaryBuilder({
+        init: 100,
+        end: 50,
+      });
+    }).toThrowError('End must be greater than init');
   });
 });

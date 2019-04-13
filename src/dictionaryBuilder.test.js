@@ -71,8 +71,23 @@ describe('dictionaryBuilder(...)', () => {
     });
   });
 
-  it('allows to build multiples dictionaries at once in a single file', () => {
-    // TODO: Implement this test
+  it("concatenates the dictionaries into a single file when it's called several times", () => {
+    const { fs, dictionaryBuilder } = makeRequires();
+
+    const configs = [
+      { init: 7, end: 10, prefix: 'a', suffix: 'b', str: 'a7b\na8b\na9b\na10b\n' },
+      { init: 0, end: 4, prefix: 'p', suffix: 's', str: 'p0s\np1s\np2s\np3s\np4s\n' },
+      { init: 97, end: 101, prefix: 'z', str: 'z97\nz98\nz99\nz100\nz101\n' },
+      { init: 50, end: 50, str: '50\n' },
+    ];
+
+    const expected = configs.reduce((acc, { str }) => acc + str, '');
+
+    configs.forEach(({ init, end, prefix, suffix }) => {
+      dictionaryBuilder({ init, end, prefix, suffix });
+    });
+
+    expect(fs._getMockFiles()[FILENAME]).toEqual(expected);
   });
 
   it('throws an error when end is less than or equal than init', () => {

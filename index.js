@@ -1,6 +1,6 @@
-const args = require('./args');
-const dictionaryBuilder = require('./dictionaryBuilder');
-const defaults = require('./defaults');
+const args = require('./src/args');
+const dictionaryBuilder = require('./src/dictionaryBuilder');
+const defaults = require('./src/defaults');
 
 args
   .option(['prefix', 'p'], 'Text to be added before the generated numbers', defaults.PREFIX)

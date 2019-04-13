@@ -71,7 +71,7 @@ describe('Args class', () => {
   describe('args.clean()', () => {
     it('removes old state of class Args', () => {
       const [key, value] = ['test', 'default'];
-      args.option(key, 'decription', value);
+      args.option(key, 'description', value);
       expect(args.options.size).toBe(1);
       expect(args.config[key]).toEqual(value);
       args.clean();

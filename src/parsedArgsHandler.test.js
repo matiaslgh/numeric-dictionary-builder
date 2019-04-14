@@ -47,4 +47,24 @@ describe('parsedArgsHandler(...)', () => {
 
     expect(dictionaryBuilder).toHaveBeenCalledTimes(goodConfigs.length);
   });
+
+  it('throws an error when either init, end or batchSize is not a number', () => {
+    const wrongConfigs = [
+      { init: 'string' },
+      { end: { object: true } },
+      { batchSize: [100, 20] },
+      { init: [1, 20], end: [10, true] },
+    ];
+
+    wrongConfigs.forEach(conf => {
+      expect(() => paHandler(conf)).toThrowError('init, end and batchSize only accept numbers');
+    });
+
+    const goodConfigs = [{ init: '10' }, { end: '20' }, { init: '0', end: '10', batchSize: '5' }];
+
+    goodConfigs.forEach(conf => {
+      paHandler(conf);
+      expect(dictionaryBuilder).toHaveBeenLastCalledWith(conf);
+    });
+  });
 });

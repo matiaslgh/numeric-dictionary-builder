@@ -31,4 +31,24 @@ describe('Utils', () => {
       nonOptions.forEach(opt => expect(isAnOption(opt)).toBe(false));
     });
   });
+
+  describe('getCombinations(...)', () => {
+    const { getCombinations } = utils;
+
+    it('returns an array of objects with every possible combination of input object', () => {
+      const config = {
+        init: 0,
+        end: 5,
+        prefix: ['a', 'b'],
+        suffix: ['c', 'd'],
+      };
+
+      expect(getCombinations(config)).toEqual([
+        { init: 0, end: 5, prefix: 'a', suffix: 'c' },
+        { init: 0, end: 5, prefix: 'a', suffix: 'd' },
+        { init: 0, end: 5, prefix: 'b', suffix: 'c' },
+        { init: 0, end: 5, prefix: 'b', suffix: 'd' },
+      ]);
+    });
+  });
 });

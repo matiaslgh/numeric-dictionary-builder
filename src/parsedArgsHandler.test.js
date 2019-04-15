@@ -67,4 +67,30 @@ describe('parsedArgsHandler(...)', () => {
       expect(dictionaryBuilder).toHaveBeenLastCalledWith(conf);
     });
   });
+
+  it('calls dictionaryBuilder with all  the combinations of prefixes/suffixes in every provided range', () => {
+    const config = {
+      init: [0, 500],
+      end: [5, 502],
+      prefix: ['a', 'b'],
+      suffix: ['c', 'd'],
+    };
+
+    paHandler(config);
+
+    const combinations = [
+      { init: 0, end: 5, prefix: 'a', suffix: 'c' },
+      { init: 0, end: 5, prefix: 'a', suffix: 'd' },
+      { init: 0, end: 5, prefix: 'b', suffix: 'c' },
+      { init: 0, end: 5, prefix: 'b', suffix: 'd' },
+      { init: 500, end: 502, prefix: 'a', suffix: 'c' },
+      { init: 500, end: 502, prefix: 'a', suffix: 'd' },
+      { init: 500, end: 502, prefix: 'b', suffix: 'c' },
+      { init: 500, end: 502, prefix: 'b', suffix: 'd' },
+    ];
+
+    combinations.forEach(args => {
+      expect(dictionaryBuilder).toHaveBeenCalledWith(args);
+    });
+  });
 });

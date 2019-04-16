@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Script to build a numeric dictionary file",
   "main": "index.js",
+  "jest": {
+    "setupFilesAfterEnv": ["jest-extended"]
+  },
   "scripts": {
     "test": "jest --coverage",
     "watch": "jest --watchAll"
@@ -19,6 +22,7 @@
   "homepage": "https://github.com/matiaslgh/numeric-dictionary-builder#readme",
   "devDependencies": {
     "eslint": "^5.16.0",
-    "jest": "^24.6.0"
+    "jest": "^24.6.0",
+    "jest-extended": "^0.11.1"
   }
 }

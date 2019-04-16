@@ -43,7 +43,7 @@ describe('Utils', () => {
         suffix: ['c', 'd'],
       };
 
-      expect(getCombinations(config)).toEqual([
+      expect(getCombinations(config)).toIncludeSameMembers([
         { init: 0, end: 5, prefix: 'a', suffix: 'c' },
         { init: 0, end: 5, prefix: 'a', suffix: 'd' },
         { init: 0, end: 5, prefix: 'b', suffix: 'c' },

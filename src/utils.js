@@ -37,3 +37,11 @@ module.exports.getCombinations = obj => {
 
   return combinations;
 };
+
+module.exports.getValueOrDefaultAsArray = (obj, key, default_) => {
+  if (typeof obj[key] === 'undefined') {
+    return [default_];
+  }
+
+  return obj[key] instanceof Array ? obj[key] : [obj[key]];
+};

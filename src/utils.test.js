@@ -51,4 +51,39 @@ describe('Utils', () => {
       ]);
     });
   });
+
+  describe('getValueOrDefaultAsArray(...)', () => {
+    const { getValueOrDefaultAsArray } = utils;
+    const baseObject = {
+      ignore: [1, 2, 3],
+      noise: 'Ignore me too',
+    };
+
+    it('returns the required value as an array of 1 element when it was not an array', () => {
+      const obj = {
+        ...baseObject,
+        important: 1,
+      };
+      expect(getValueOrDefaultAsArray(obj, 'important')).toEqual([1]);
+    });
+
+    it('returns the required value as it is when it is already an array', () => {
+      const match = [1, '2nd', true];
+      const obj = {
+        ...baseObject,
+        important: match,
+      };
+      expect(getValueOrDefaultAsArray(obj, 'important')).toEqual(match);
+    });
+
+    it('returns the default value as an array when the ket does not exist in the object', () => {
+      const defaultValue = 'default_value';
+      expect(getValueOrDefaultAsArray(baseObject, 'important', defaultValue)).toEqual([
+        defaultValue,
+      ]);
+
+      let undefinedDefault;
+      expect(getValueOrDefaultAsArray(baseObject, 'important')).toEqual([undefinedDefault]);
+    });
+  });
 });

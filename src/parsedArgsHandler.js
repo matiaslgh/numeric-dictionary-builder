@@ -1,9 +1,10 @@
 const dictionaryBuilder = require('./dictionaryBuilder');
+const { getCombinations, getValueOrDefaultAsArray } = require('./utils');
 const { INIT, END, BATCH_SIZE } = require('./defaults');
 
-const validate = ({ init = INIT, end = END, batchSize = BATCH_SIZE }) => {
-  const initArr = init instanceof Array ? init : [init];
-  const endArr = end instanceof Array ? end : [end];
+const validate = ({ batchSize = BATCH_SIZE, ...params }) => {
+  const initArr = getValueOrDefaultAsArray(params, 'init', INIT);
+  const endArr = getValueOrDefaultAsArray(params, 'end', END);
 
   if (initArr.length !== endArr.length) {
     throw new Error("The amount of 'init' must be equal to the amount of 'end'");
@@ -21,5 +22,22 @@ const validate = ({ init = INIT, end = END, batchSize = BATCH_SIZE }) => {
 
 module.exports = function parsedArgsManager(params) {
   validate(params);
-  dictionaryBuilder(params);
+
+  const initArr = getValueOrDefaultAsArray(params, 'init');
+  const endArr = getValueOrDefaultAsArray(params, 'end');
+  const combinations = [];
+
+  for (let i = 0; i < initArr.length; i++) {
+    combinations.push(
+      ...getCombinations({
+        ...params,
+        init: initArr[i],
+        end: endArr[i],
+      })
+    );
+  }
+
+  combinations.forEach(comb => {
+    dictionaryBuilder(comb);
+  });
 };

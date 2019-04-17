@@ -68,7 +68,8 @@ describe('parsedArgsHandler(...)', () => {
     });
   });
 
-  it('calls dictionaryBuilder with all  the combinations of prefixes/suffixes in every provided range', () => {
+  it('calls dictionaryBuilder with all the combinations of prefixes/suffixes in every provided range', () => {
+    // TODO: Mock getValueOrDefaultAsArray(...)
     const config = {
       init: [0, 500],
       end: [5, 502],

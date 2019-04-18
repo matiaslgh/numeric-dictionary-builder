@@ -50,6 +50,12 @@ describe('Utils', () => {
         { init: 0, end: 5, prefix: 'b', suffix: 'd' },
       ]);
     });
+
+    it('returns an array of only one element when there is only one combination possible', () => {
+      const config = { init: 0, end: 50, prefix: 'pre', suffix: 'suf', batchSize: 10 };
+
+      expect(getCombinations(config)).toEqual([config]);
+    });
   });
 
   describe('getValueOrDefaultAsArray(...)', () => {

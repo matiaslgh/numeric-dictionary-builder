@@ -68,8 +68,9 @@ describe('parsedArgsHandler(...)', () => {
     });
   });
 
+  // I've decided not to mock the methods of utils.js for this test
+  // since I prefer more an integration test for this feature instead of a unit test
   it('calls dictionaryBuilder with all the combinations of prefixes/suffixes in every provided range', () => {
-    // TODO: Mock getValueOrDefaultAsArray(...)
     const config = {
       init: [0, 500],
       end: [5, 502],

@@ -20,7 +20,7 @@ const validate = ({ batchSize = BATCH_SIZE, ...params }) => {
   }
 };
 
-module.exports = function parsedArgsManager(params) {
+module.exports = function parsedArgsHandler(params) {
   validate(params);
 
   const initArr = getValueOrDefaultAsArray(params, 'init');

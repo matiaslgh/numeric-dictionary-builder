@@ -1,6 +1,12 @@
 const fs = require('fs');
 const defaults = require('./defaults');
 
+/**
+ * This is the core of this project. It receives an object with options an builds a file
+ * with numbers between `init` and `end` using `prefix` and `suffix`.
+ *
+ * @param {Object} config to generate the numbers and save them in a file
+ */
 function dictionaryBuilder({
   prefix = defaults.PREFIX,
   suffix = defaults.SUFFIX,

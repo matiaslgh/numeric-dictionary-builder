@@ -1,5 +1,5 @@
 const args = require('./src/args');
-const dictionaryBuilder = require('./src/dictionaryBuilder');
+const parsedArgsHandler = require('./src/parsedArgsHandler');
 const defaults = require('./src/defaults');
 
 args
@@ -13,4 +13,4 @@ args
     defaults.BATCH_SIZE
   );
 
-dictionaryBuilder(args.parse(process.argv));
+parsedArgsHandler(args.parse(process.argv));

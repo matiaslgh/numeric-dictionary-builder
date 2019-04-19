@@ -36,11 +36,10 @@ describe('Args class', () => {
     });
 
     it('adds data into internal Map', () => {
-      const init = jest.fn();
       const configs = [
-        ['name1', 'description1', 'default1', init],
-        ['name2', 'description2', 'default2', init],
-        ['name3', 'description3', 'default3', init],
+        ['name1', 'description1', 'default1'],
+        ['name2', 'description2', 'default2'],
+        ['name3', 'description3', 'default3'],
       ];
 
       configs.forEach(config => {
@@ -51,7 +50,6 @@ describe('Args class', () => {
         expect(args.options.get(config[0])).toEqual({
           description: config[1],
           default_: config[2],
-          init: config[3],
         });
       });
 

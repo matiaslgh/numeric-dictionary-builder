@@ -2,6 +2,11 @@ const dictionaryBuilder = require('./dictionaryBuilder');
 const { getCombinations, getValueOrDefaultAsArray } = require('./utils');
 const { INIT, END, BATCH_SIZE } = require('./defaults');
 
+/**
+ * Throws an error when the config is not valid
+ *
+ * @param {Object } config to validate before preprocessing
+ */
 const validate = ({ batchSize = BATCH_SIZE, ...params }) => {
   const initArr = getValueOrDefaultAsArray(params, 'init', INIT);
   const endArr = getValueOrDefaultAsArray(params, 'end', END);
@@ -20,6 +25,12 @@ const validate = ({ batchSize = BATCH_SIZE, ...params }) => {
   }
 };
 
+/**
+ * Depending on the values, dictionaryBuilder will be called once or several times.
+ * This method will do the corresponding preprocessing and will call dictionaryBuilder then.
+ *
+ * @param {Object} params to preprocess before calling dictionaryBuilder
+ */
 module.exports = function parsedArgsHandler(params) {
   validate(params);
 

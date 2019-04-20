@@ -1,4 +1,4 @@
-const args = require('./args');
+const args = require('./index');
 
 describe('Args class', () => {
   afterEach(() => {
@@ -11,6 +11,10 @@ describe('Args class', () => {
 
   it('creates an empty Object as a config', () => {
     expect(args.config).toEqual({});
+  });
+
+  it('creates an empty Object for help data', () => {
+    expect(args.helpData).toEqual({});
   });
 
   describe('args.option()', () => {
@@ -26,7 +30,6 @@ describe('Args class', () => {
       args.option(names, ...config);
 
       expect(args.options.get(names[0])).toEqual({
-        description: config[0],
         default_: config[1],
       });
 
@@ -48,12 +51,35 @@ describe('Args class', () => {
 
       configs.forEach(config => {
         expect(args.options.get(config[0])).toEqual({
-          description: config[1],
           default_: config[2],
         });
       });
 
       expect(args.options.size).toBe(3);
+    });
+
+    it('saves aliases and descriptions into internal helpData object', () => {
+      const configs = [
+        ['name1', 'description1', 'default1'],
+        [['name2', 'n2'], 'description2', 'default2'],
+      ];
+
+      configs.forEach(config => {
+        args.option(...config);
+      });
+
+      expect(Object.keys(args.helpData).length).toBe(configs.length);
+
+      expect(args.helpData).toEqual({
+        name1: {
+          aliases: [],
+          description: 'description1',
+        },
+        name2: {
+          aliases: ['n2'],
+          description: 'description2',
+        },
+      });
     });
 
     it('is chainable', () => {

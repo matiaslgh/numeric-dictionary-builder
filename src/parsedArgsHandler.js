@@ -32,6 +32,7 @@ const validate = ({ batchSize = BATCH_SIZE, ...params }) => {
  * @param {Object} params to preprocess before calling dictionaryBuilder
  */
 module.exports = function parsedArgsHandler(params) {
+  if (!params) return false;
   validate(params);
 
   const initArr = getValueOrDefaultAsArray(params, 'init');

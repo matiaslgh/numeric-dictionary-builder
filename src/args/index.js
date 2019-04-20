@@ -1,4 +1,4 @@
-const { removeFirstHyphens, isAnOption } = require('./utils');
+const { removeFirstHyphens, isAnOption } = require('../utils');
 
 /**
  * Class inspired on https://www.npmjs.com/package/args to handle the script arguments.
@@ -8,8 +8,7 @@ const { removeFirstHyphens, isAnOption } = require('./utils');
  */
 class Args {
   constructor() {
-    this.options = new Map();
-    this.config = {};
+    this.clean();
   }
 
   /**
@@ -33,7 +32,6 @@ class Args {
 
     this.config[realName] = default_;
     this.options.set(realName, {
-      description,
       default_,
     });
 
@@ -42,6 +40,11 @@ class Args {
         realName,
       });
     });
+
+    this.helpData[realName] = {
+      aliases,
+      description,
+    };
 
     return this;
   }
@@ -53,14 +56,16 @@ class Args {
   clean() {
     this.options = new Map();
     this.config = {};
+    this.helpData = {};
   }
 
   /**
    * Process process.argv and returns the options names as key with their corresponding values
    * If the option has multiple names, the object will have the first one as key
+   * If help is required, it will return false
    *
    * @param {string[]} _params Normally this would be process.argv
-   * @returns {Object} args name as key and their values as value
+   * @returns {Object|boolean} args name as key and their values as value or false if help is required
    */
   parse(_params) {
     if (!(_params instanceof Array)) throw new Error('Array expected');
@@ -69,6 +74,12 @@ class Args {
     let currentConfigKey;
 
     const params = _params.slice(2);
+
+    if (params.includes('--help') || params.includes('-h')) {
+      this.showHelp();
+      return false;
+    }
+
     params.forEach((param, index) => {
       if (isAnOption(param)) {
         const previousArgIsAlsoAnOption = params[index - 1] && isAnOption(params[index - 1]);
@@ -102,6 +113,10 @@ class Args {
     });
 
     return this.config;
+  }
+
+  showHelp() {
+    // TODO: Implement this
   }
 }
 

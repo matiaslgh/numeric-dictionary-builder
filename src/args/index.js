@@ -1,4 +1,5 @@
 const { removeFirstHyphens, isAnOption } = require('../utils');
+const showHelp = require('./showHelp');
 
 /**
  * Class inspired on https://www.npmjs.com/package/args to handle the script arguments.
@@ -116,7 +117,7 @@ class Args {
   }
 
   showHelp() {
-    // TODO: Implement this
+    showHelp(this.helpData);
   }
 }
 

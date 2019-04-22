@@ -93,6 +93,20 @@ describe('Utils', () => {
     });
   });
 
+  describe('getScriptName(...)', () => {
+    const { getScriptName } = utils;
+
+    it('adds only one hyphen at the beginning of the string if it has only one character', () => {
+      const scriptName = 'script_name';
+
+      global.process = {
+        argv: ['node_path', `/home/username/Desktop/${scriptName}`, 'param1', 'param2'],
+      };
+
+      expect(getScriptName()).toBe(scriptName);
+    });
+  });
+
   describe('addHyphens(...)', () => {
     const { addHyphens } = utils;
 

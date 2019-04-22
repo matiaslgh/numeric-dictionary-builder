@@ -1,17 +1,16 @@
 const { yellow, gray } = require('chalk');
-
-const getScriptName = () => {
-  const pathArr = process.argv[1].split('/');
-  return pathArr[pathArr.length - 1];
-};
+const { addHyphens, getScriptName } = require('../utils');
 
 const buildUsage = () => `  Usage: ${yellow(getScriptName())} ${gray('[options]')}`;
 
 const buildOptions = helpData => {
   let text = '  Options:\n';
+  text += `    ${yellow('--help, -h')}`;
+  text += `\t${gray('Output usage information')}\n`;
   Object.keys(helpData).forEach(realName => {
     const { aliases, description } = helpData[realName];
-    text += `    ${yellow([realName, ...aliases].join(', '))}`;
+    const options = [realName, ...aliases].map(n => addHyphens(n));
+    text += `    ${yellow(options.join(', '))}`;
     text += `\t${gray(description)}\n`;
   });
 
@@ -21,5 +20,5 @@ const buildOptions = helpData => {
 module.exports = function showHelp(helpData) {
   const usage = buildUsage();
   const options = buildOptions(helpData);
-  console.log(`${usage}\n\n${options}`);
+  console.log(`${usage}\n\n${options}`); // eslint-disable-line no-console
 };

@@ -76,6 +76,15 @@ module.exports.getValueOrDefaultAsArray = (obj, key, default_) => {
 };
 
 /**
+ * @returns {string} with the name of the script which is being executed,
+ * but without the entire path
+ */
+module.exports.getScriptName = () => {
+  const pathArr = process.argv[1].split('/');
+  return pathArr[pathArr.length - 1];
+};
+
+/**
  * Adds one hyphen at the beginning of the string if it's only one character
  * Adds two hyphens at the beginning of the string if it's more than one character
  *

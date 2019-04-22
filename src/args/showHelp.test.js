@@ -1,3 +1,4 @@
+const { getScriptName } = require('../utils');
 const showHelp = require('./showHelp');
 
 jest.mock('chalk', () => ({
@@ -28,7 +29,9 @@ describe('showHelp(...)', () => {
       },
     };
 
-    let expected = '  Usage: yellow(jest) gray([options])\n\n';
+    // use getScriptName() because it's 'jest' when it's run individually
+    // and 'processChild.js' when it's run as a process child
+    let expected = `  Usage: yellow(${getScriptName()}) gray([options])\n\n`;
     expected += '  Options:\n';
     expected += '    yellow(--help, -h)\tgray(Output usage information)\n';
     expected += '    yellow(-a)\tgray(This is an a)\n';

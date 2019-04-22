@@ -75,4 +75,11 @@ module.exports.getValueOrDefaultAsArray = (obj, key, default_) => {
   return obj[key] instanceof Array ? obj[key] : [obj[key]];
 };
 
+/**
+ * Adds one hyphen at the beginning of the string if it's only one character
+ * Adds two hyphens at the beginning of the string if it's more than one character
+ *
+ * @param {string} string
+ * @returns {string} the input with one or two hyphens at the beginning
+ */
 module.exports.addHyphens = string => (string.length === 1 ? `-${string}` : `--${string}`);

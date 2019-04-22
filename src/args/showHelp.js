@@ -3,6 +3,7 @@ const { addHyphens, getScriptName } = require('../utils');
 
 const buildUsage = () => `  Usage: ${yellow(getScriptName())} ${gray('[options]')}`;
 
+// TODO: Improve options indentation
 const buildOptions = helpData => {
   let text = '  Options:\n';
   text += `    ${yellow('--help, -h')}`;

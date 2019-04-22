@@ -74,3 +74,5 @@ module.exports.getValueOrDefaultAsArray = (obj, key, default_) => {
 
   return obj[key] instanceof Array ? obj[key] : [obj[key]];
 };
+
+module.exports.addHyphens = string => (string.length === 1 ? `-${string}` : `--${string}`);

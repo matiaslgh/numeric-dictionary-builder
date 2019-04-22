@@ -92,4 +92,16 @@ describe('Utils', () => {
       expect(getValueOrDefaultAsArray(baseObject, 'important')).toEqual([undefinedDefault]);
     });
   });
+
+  describe('addHyphens(...)', () => {
+    const { addHyphens } = utils;
+
+    it('adds only one hyphen at the beginning of the string if it has only one character', () => {
+      expect(addHyphens('a')).toBe('-a');
+    });
+
+    it('adds two hyphen at the beginning of the string if it has more than one character', () => {
+      expect(addHyphens('moreThanOneChar')).toBe('--moreThanOneChar');
+    });
+  });
 });

@@ -24,11 +24,11 @@ describe('Utils', () => {
     const nonOptions = ['notAnOption', 10, null];
 
     it('returns true if the param is an option', () => {
-      options.forEach(opt => expect(isAnOption(opt)).toBe(true));
+      options.forEach(opt => expect(isAnOption(opt)).toBeTrue());
     });
 
     it('returns false if the param is not an option or is not a valid value', () => {
-      nonOptions.forEach(opt => expect(isAnOption(opt)).toBe(false));
+      nonOptions.forEach(opt => expect(isAnOption(opt)).toBeFalse());
     });
   });
 

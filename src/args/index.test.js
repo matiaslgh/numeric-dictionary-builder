@@ -201,7 +201,7 @@ describe('Args class', () => {
 
       const originalShowHelp = args.showHelp;
       args.showHelp = jest.fn();
-      expect(args.parse(params)).toBe(false);
+      expect(args.parse(params)).toBeFalse();
       expect(args.showHelp).toHaveBeenCalledTimes(1);
       args.showHelp = originalShowHelp;
     });
@@ -211,7 +211,7 @@ describe('Args class', () => {
 
       const originalShowHelp = args.showHelp;
       args.showHelp = jest.fn();
-      expect(args.parse(params)).toBe(false);
+      expect(args.parse(params)).toBeFalse();
       expect(args.showHelp).toHaveBeenCalledTimes(1);
       args.showHelp = originalShowHelp;
     });

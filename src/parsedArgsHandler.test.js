@@ -95,4 +95,10 @@ describe('parsedArgsHandler(...)', () => {
       expect(dictionaryBuilder).toHaveBeenCalledWith(args);
     });
   });
+
+  it('returns false if parsedArgsHandler receives a falsy input', () => {
+    expect(paHandler()).toBeFalse();
+    expect(paHandler(null)).toBeFalse();
+    expect(paHandler('')).toBeFalse();
+  });
 });

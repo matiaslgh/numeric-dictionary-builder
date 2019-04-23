@@ -195,6 +195,26 @@ describe('Args class', () => {
         c: true,
       });
     });
+
+    it('calls args.showHelp() if --help is passed as an argument and returns false', () => {
+      const params = ['/usr/local/bin/node', 'script.js', '--help'];
+
+      const originalShowHelp = args.showHelp;
+      args.showHelp = jest.fn();
+      expect(args.parse(params)).toBe(false);
+      expect(args.showHelp).toHaveBeenCalledTimes(1);
+      args.showHelp = originalShowHelp;
+    });
+
+    it('calls args.showHelp() if -h is passed as an argument and returns false', () => {
+      const params = ['/usr/local/bin/node', 'script.js', '-h'];
+
+      const originalShowHelp = args.showHelp;
+      args.showHelp = jest.fn();
+      expect(args.parse(params)).toBe(false);
+      expect(args.showHelp).toHaveBeenCalledTimes(1);
+      args.showHelp = originalShowHelp;
+    });
   });
 
   describe('args.showHelp(...)', () => {

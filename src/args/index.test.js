@@ -1,5 +1,7 @@
 const args = require('./index');
 
+jest.mock('./showHelp.js');
+
 describe('Args class', () => {
   afterEach(() => {
     args.clean();
@@ -192,6 +194,28 @@ describe('Args class', () => {
         b: 'default2',
         c: true,
       });
+    });
+  });
+
+  describe('args.showHelp(...)', () => {
+    const showHelpMock = require('./showHelp');
+
+    it('calls ./showHelp.js with helpData object', () => {
+      args.showHelp();
+      expect(showHelpMock).toHaveBeenLastCalledWith({});
+
+      const helpData = {
+        name1: {
+          aliases: [],
+          description: 'description1',
+        },
+      };
+
+      args.helpData = helpData;
+
+      args.showHelp();
+      expect(showHelpMock).toHaveBeenLastCalledWith(helpData);
+      expect(showHelpMock).toHaveBeenCalledTimes(2);
     });
   });
 });

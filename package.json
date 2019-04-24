@@ -2,7 +2,7 @@
   "name": "numeric-dictionary-builder",
   "version": "1.0.0",
   "description": "Script to build a numeric dictionary file",
-  "main": "index.js",
+  "main": "./src/index.js",
   "jest": {
     "setupFilesAfterEnv": [
       "jest-extended"
@@ -10,7 +10,8 @@
   },
   "scripts": {
     "test": "jest --coverage",
-    "watch": "jest --watchAll"
+    "watch": "jest --watchAll",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -25,7 +26,9 @@
   "devDependencies": {
     "eslint": "^5.16.0",
     "jest": "^24.6.0",
-    "jest-extended": "^0.11.1"
+    "jest-extended": "^0.11.1",
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.3.1"
   },
   "dependencies": {
     "chalk": "^2.4.2"

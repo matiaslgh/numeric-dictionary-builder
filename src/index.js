@@ -1,6 +1,6 @@
-const args = require('./src/args');
-const parsedArgsHandler = require('./src/parsedArgsHandler');
-const defaults = require('./src/defaults');
+const args = require('./args');
+const parsedArgsHandler = require('./parsedArgsHandler');
+const defaults = require('./defaults');
 
 args
   .option(['prefix', 'p'], 'Text to be added before the generated numbers', defaults.PREFIX)

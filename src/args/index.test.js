@@ -238,4 +238,15 @@ describe('Args class', () => {
       expect(showHelpMock).toHaveBeenCalledTimes(2);
     });
   });
+
+  describe('args.example()', () => {
+    it('adds the example to internal object', () => {
+      const usage = 'usage';
+      const description = 'description';
+
+      args.example(usage, description);
+
+      expect(args.examplesData).toEqual([{ usage, description }]);
+    });
+  });
 });

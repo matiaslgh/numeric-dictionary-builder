@@ -19,6 +19,10 @@ describe('Args class', () => {
     expect(args.helpData).toEqual({});
   });
 
+  it('creates an empty array for example data', () => {
+    expect(args.examplesData).toEqual([]);
+  });
+
   describe('args.option()', () => {
     it('throws an error if no name is provided', () => {
       expect(() => {

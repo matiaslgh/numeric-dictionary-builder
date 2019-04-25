@@ -58,6 +58,7 @@ class Args {
     this.options = new Map();
     this.config = {};
     this.helpData = {};
+    this.examplesData = [];
   }
 
   /**
@@ -121,6 +122,17 @@ class Args {
    */
   showHelp() {
     showHelp(this.helpData);
+  }
+
+  /**
+   * Stores the example into an internal object
+   * @param {string} usage Command example
+   * @param {string} description To explain what actually does the provided example
+   * @returns {Object} Returns this to be chainable
+   */
+  example(usage, description) {
+    this.examplesData.push({ usage, description });
+    return this;
   }
 }
 

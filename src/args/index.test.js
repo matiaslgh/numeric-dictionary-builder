@@ -96,13 +96,32 @@ describe('Args class', () => {
 
   describe('args.clean()', () => {
     it('removes old state of class Args', () => {
-      const [key, value] = ['test', 'default'];
-      args.option(key, 'description', value);
+      const [key, description, value] = ['test', 'description', 'default'];
+      args.option(key, description, value);
+      const [usage, exampleDescription] = ['command -a', 'Does something'];
+      args.example(usage, exampleDescription);
+
       expect(args.options.size).toBe(1);
       expect(args.config[key]).toEqual(value);
+      expect(args.helpData).toEqual({
+        test: {
+          aliases: [],
+          description,
+        },
+      });
+      expect(args.examplesData).toEqual([
+        {
+          usage,
+          description: exampleDescription,
+        },
+      ]);
+
       args.clean();
+
       expect(args.options.size).toBe(0);
       expect(args.config).toEqual({});
+      expect(args.helpData).toEqual({});
+      expect(args.examplesData).toEqual([]);
     });
   });
 

@@ -116,6 +116,9 @@ class Args {
     return this.config;
   }
 
+  /**
+   * Shows for the stdout the options and examples stored in internal objects
+   */
   showHelp() {
     showHelp(this.helpData);
   }

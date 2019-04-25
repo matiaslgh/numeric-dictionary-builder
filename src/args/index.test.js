@@ -248,5 +248,14 @@ describe('Args class', () => {
 
       expect(args.examplesData).toEqual([{ usage, description }]);
     });
+
+    it('is chainable', () => {
+      expect(
+        args
+          .option('a')
+          .example('b', 'b')
+          .example('c', 'c').example
+      ).toBeInstanceOf(Function);
+    });
   });
 });

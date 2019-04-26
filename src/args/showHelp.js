@@ -18,8 +18,24 @@ const buildOptions = helpData => {
   return text;
 };
 
-module.exports = function showHelp(helpData) {
+const buildExamples = (examplesData = []) => {
+  if (!examplesData.length) return '';
+
+  let text = '\n  Examples:\n';
+  examplesData.forEach(({ usage, description }) => {
+    text += `    ${yellow(`${getScriptName()}${usage ? ` ${usage}` : ''}`)}`;
+    text += `\t${gray(description)}\n`;
+  });
+
+  return text;
+};
+
+/**
+ * Shows for the stdout the provided options and examples
+ */
+module.exports = function showHelp(helpData, examplesData) {
   const usage = buildUsage();
   const options = buildOptions(helpData);
-  console.log(`${usage}\n\n${options}`); // eslint-disable-line no-console
+  const examples = buildExamples(examplesData);
+  console.log(`${usage}\n\n${options}${examples}`); // eslint-disable-line no-console
 };

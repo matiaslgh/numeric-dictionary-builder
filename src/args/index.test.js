@@ -243,9 +243,9 @@ describe('Args class', () => {
   describe('args.showHelp(...)', () => {
     const showHelpMock = require('./showHelp');
 
-    it('calls ./showHelp.js with helpData object', () => {
+    it('calls ./showHelp.js with helpData object and examplesData array', () => {
       args.showHelp();
-      expect(showHelpMock).toHaveBeenLastCalledWith({});
+      expect(showHelpMock).toHaveBeenLastCalledWith({}, []);
 
       const helpData = {
         name1: {
@@ -254,10 +254,13 @@ describe('Args class', () => {
         },
       };
 
+      const examplesData = [{ usage: 'usage', description: 'description' }];
+
       args.helpData = helpData;
+      args.examplesData = examplesData;
 
       args.showHelp();
-      expect(showHelpMock).toHaveBeenLastCalledWith(helpData);
+      expect(showHelpMock).toHaveBeenLastCalledWith(helpData, examplesData);
       expect(showHelpMock).toHaveBeenCalledTimes(2);
     });
   });

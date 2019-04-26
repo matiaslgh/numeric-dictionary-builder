@@ -121,7 +121,7 @@ class Args {
    * Shows for the stdout the options and examples stored in internal objects
    */
   showHelp() {
-    showHelp(this.helpData);
+    showHelp(this.helpData, this.examplesData);
   }
 
   /**

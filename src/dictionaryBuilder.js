@@ -14,6 +14,9 @@ function dictionaryBuilder({
   end = defaults.END,
   batchSize = defaults.BATCH_SIZE,
 } = {}) {
+  init = parseInt(init);
+  end = parseInt(end);
+  batchSize = parseInt(batchSize);
   if (init > end) throw new Error('End must be greater than init');
 
   end++; // Without this, the end wouldn't be included

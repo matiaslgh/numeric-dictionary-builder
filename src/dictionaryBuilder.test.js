@@ -58,6 +58,7 @@ describe('dictionaryBuilder(...)', () => {
       { init: 1, end: 10, batchSize: 4, count: 3 }, // Even # of numbers and even batchSize
       { init: 2, end: 11, batchSize: 3, count: 4 }, // Even # of numbers and odd batchSize
       { init: 3, end: 5, batchSize: 100, count: 1 }, // batchSize greater than # of numbers
+      { init: '1', end: '11', batchSize: '2', count: 6 }, // Normal input will be string
     ];
 
     configs.forEach(({ init, end, batchSize, count }) => {

@@ -4,9 +4,6 @@ Script to build a dictionary file, with a list of numbers (with optional prefix/
 ## Motivation
 The dictionary is useful to apply brute force. In my case, I was playing a little with [aircrack](http://aircrack-ng.org/) to crack WPA/2 WiFi passwords. Anyway, with [this version](https://github.com/matiaslgh/numeric-dictionary-builder/commit/d705353e2bee8e4db4b36468d037742b3849e2a5) was enough to create the dictionary, but I decided to write a nicer solution with TDD to have a project to show when it's required.
 
-## Screenshots
-TODO: Complete this
-
 ## Features
 TODO: Complete this
 
@@ -40,11 +37,14 @@ It will run the tests in watch mode. Useful to develop with TDD.
     --batchSize, -b   Amount of generated keys saved in memory before adding them into the output file
 
   Examples:
-    genDictionary.js -p 014 -p 004 -p 024 -i 170000 -e 999999 -i 1700000 -e 9999999 -i 17000000 -e 99999999	Generates the file with 014{170k-999999}, 004{170k-999999}, 024{170k-999999}.. And the same for the other 2 ranges (1,7m to 9m and 17m to 99m).. Ideal for fibertel's default wifi password
+    genDictionary.js -p 014 -p 004 -p 024 -i 170000 -e 999999 -i 1700000 -e 9999999 -i 17000000 -e 99999999
+    Generates the file with 014{170k-999999}, 004{170k-999999}, 024{170k-999999}..
+    And the same for the other 2 ranges (1,7m to 9m and 17m to 99m)..
+    Ideal for fibertel's default wifi password
 ```
 
 ## Contribute
 TODO: Complete this
 
 ## License
-TODO: Complete this
+[MIT](https://choosealicense.com/licenses/mit/)

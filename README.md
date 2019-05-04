@@ -4,9 +4,6 @@ Script to build a dictionary file, with a list of numbers (with optional prefix/
 ## Motivation
 The dictionary is useful to apply brute force. In my case, I was playing a little with [aircrack](http://aircrack-ng.org/) to crack WPA/2 WiFi passwords. Anyway, with [this version](https://github.com/matiaslgh/numeric-dictionary-builder/commit/d705353e2bee8e4db4b36468d037742b3849e2a5) was enough to create the dictionary, but I decided to write a nicer solution with TDD to have a project to show when it's required.
 
-## Features
-TODO: Complete this
-
 ## Installation
 `npm install`
 
@@ -44,7 +41,8 @@ It will run the tests in watch mode. Useful to develop with TDD.
 ```
 
 ## Contribute
-TODO: Complete this
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+TODO: Create a CONTRIBUTING.md
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

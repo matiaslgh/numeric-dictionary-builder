@@ -20,9 +20,9 @@ For example:
 
 
 ### Pull Requests
-Pull Requests are always welcome. 
+Pull Requests are always welcome.
 
-1. When you edit the code, please run `npm run test` to check the formatting of your code before you `git commit`.
+1. When you edit the code, please run `npm run test` and `npm run lint` to check the formatting of your code before you `git commit`.
 2. This project uses eslint and prettier. If you configure them in your IDE, you are going to detect/prevent some style/conventions issues.
 3. This project has been done with TDD and it must keep that way. This means that if you add a new feature you must create its tests. If you fix a bug, you should add the test case which cover that scenario. At the end, the coverage must be at 100%.
 4. Ensure the PR description clearly describes the problem and solution. It should include the relevant issue number, if applicable.

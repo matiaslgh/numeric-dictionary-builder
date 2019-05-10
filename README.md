@@ -48,6 +48,7 @@ Take a look to [CONTRIBUTING.md](https://github.com/matiaslgh/numeric-dictionary
 - Remove the default init/end params. If they are not present, the help should be shown.
 - If there are several combinations, it would be nice a flag for creating them in different files with {PREFIX}-{INIT}-{END}-{SUFFIX} as a name
 - Handling if a file with that name already exists
+- Improve --help indentation
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
